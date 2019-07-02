@@ -75,6 +75,37 @@ app.get('/futsals/:id', async (req, res) => {
   }
 });
 
+app.patch('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!user) {
+      return res.status(404).send();
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+app.patch('/futsals/:id', async (req, res) => {
+  console.log(req.params.id, req.body);
+  try {
+    const futsal = await Futsal.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!futsal) {
+      return res.status(404).send();
+    }
+    res.send(futsal);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 app.listen(port, () => {
   console.log('Server is up on port ' + port);
 });
