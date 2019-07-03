@@ -1,5 +1,4 @@
 # futbookee-backend
-backend for fubookee app
 
 Here is the scaffold for the API
 
