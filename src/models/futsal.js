@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const Futsal = mongoose.model('Futsal', {
+const futsalSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,5 +13,7 @@ const Futsal = mongoose.model('Futsal', {
     trim: true
   }
 });
+
+const Futsal = mongoose.model('Futsal', futsalSchema);
 
 module.exports = Futsal;

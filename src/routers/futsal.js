@@ -49,10 +49,10 @@ router.patch('/futsals/:id', async (req, res) => {
     return res.status(400).send({ error: 'Invalid updates!' });
   }
   try {
-    const futsal = await Futsal.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const futsal = await Futsal.findById(req.params.id);
+    updates.forEach(update => (futsal[update] = req.body[update]));
+    await futsal.save();
+
     if (!futsal) {
       return res.status(404).send();
     }
