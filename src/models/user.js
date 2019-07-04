@@ -57,8 +57,6 @@ userSchema.statics.findByCredentials = async (email, password) => {
     throw new Error('Unable to login');
   }
 
-  console.log(user);
-
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
@@ -66,6 +64,16 @@ userSchema.statics.findByCredentials = async (email, password) => {
   }
 
   return user;
+};
+
+userSchema.methods.toJSON = function() {
+  const user = this;
+  userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
 };
 
 userSchema.methods.generateAuthToken = async function() {

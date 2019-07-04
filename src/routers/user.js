@@ -42,7 +42,6 @@ router.patch('/users/:id', async (req, res) => {
   if (!isValidOperation) {
     return res.status(400).send({ error: 'Invalid updates!' });
   }
-  console.log(updates);
   try {
     const user = await User.findById(req.params.id);
     updates.forEach(update => {
@@ -73,14 +72,13 @@ router.delete('/users/:id', async (req, res) => {
 });
 
 router.post('/users/login', async (req, res) => {
-  console.log('hare');
   try {
     const user = await User.findByCredentials(
       req.body.email,
       req.body.password
     );
     const token = await user.generateAuthToken();
-    res.send({ user, token });
+    res.send({ user: user, token });
   } catch (error) {
     res.status(400).send(error);
   }
