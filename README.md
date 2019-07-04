@@ -1,8 +1,5 @@
 # futbookee-backend
 
-
-[![node-login](./readme.img/node-login.jpg?raw=true)](https://nodejs-login.herokuapp.com)
-
 ### A basic futsal booking system built with Node.js with the following features:
 
 * New User Account Creation
@@ -26,12 +23,11 @@ No live demo yet.
 
 		> mongod
 
-4. From within the node-login directory start the server.
+4. From within the futbookee-backend directory start the server.
 
 		> npm run start
 		
-5. 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cb4c5b224adad1acb975)
+5.   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cb4c5b224adad1acb975)
 
 
 
