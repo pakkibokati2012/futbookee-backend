@@ -36,20 +36,11 @@ For testing purposes you can view a [database dump of all accounts here](https:/
 
 		> node app
 		
-5. [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cb4c5b224adad1acb975)
+5. 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cb4c5b224adad1acb975)
 
 
-## Password Retrieval
 
-To enable the password retrieval feature it is recommended that you create environment variables for your credentials instead of hard coding them into the [email dispatcher module](https://github.com/braitsch/node-login/blob/master/app/server/modules/email-dispatcher.js).
-
-To do this on OSX you can simply add them to your .profile or .bashrc file.
-
-	export NL_EMAIL_HOST='smtp.gmail.com'
-	export NL_EMAIL_USER='your.email@gmail.com'
-	export NL_EMAIL_PASS='1234'
-
-[![node-login](./readme.img/retrieve-password.jpg?raw=true)](https://nodejs-login.herokuapp.com)
 
 
 ## Contributing
