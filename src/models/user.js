@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     validate(value) {
-      if (!validator.isMobilePhone(value.toString())) {
-        throw new Error('Phone number is not valid!');
-      }
+      // if (!validator.isMobilePhone(value.toString())) {
+      //   throw new Error('Phone number is not valid!');
+      // }
     }
   },
   email: {
