@@ -2,7 +2,7 @@
 
 ### A basic futsal booking system built with Node.js with the following features:
 
-* New User Account Creation
+* New User Account Creation only after phone number validation
 * New Futsal Registration
 * Ability to Update / Delete Account
 * Session Tracking for Logged-In Users
