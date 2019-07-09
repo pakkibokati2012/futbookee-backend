@@ -9,7 +9,7 @@ const sendCodeToMobilie = async (req, res, next) => {
       .services('VAec698bdac64fe79b555e0f91d2ce307b')
       .verifications.create({ to: phoneNumber, channel: 'sms' })
       .then(verification => console.log(verification.sid));
-      next();
+    next();
   } catch (error) {
     res
       .status(401)
@@ -18,4 +18,3 @@ const sendCodeToMobilie = async (req, res, next) => {
 };
 
 module.exports = sendCodeToMobilie;
-
