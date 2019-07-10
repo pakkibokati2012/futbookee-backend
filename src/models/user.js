@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     validate(value) {
-      if (!validator.isMobilePhone(value.toString())) {
-        throw new Error('Phone number is not valid!');
-      }
+      // if (!validator.isMobilePhone(value.toString())) {
+      //   throw new Error('Phone number is not valid!');
+      // }
     }
   },
   email: {
@@ -47,7 +47,10 @@ const userSchema = new mongoose.Schema({
         required: true
       }
     }
-  ]
+  ],
+  avatar: {
+    type: Buffer
+  }
 });
 
 userSchema.statics.findByCredentials = async (email, password) => {
@@ -72,6 +75,7 @@ userSchema.methods.toJSON = function() {
 
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.avatar;
 
   return userObject;
 };

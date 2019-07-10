@@ -1,10 +1,30 @@
 const express = require('express');
+const multer = require('multer');
 const User = require('../models/user');
 const Futsal = require('../models/futsal');
 const auth = require('../middlewares/auth');
+const sendCodeToMobile = require('../middlewares/sendcode');
+const verifyPhoneNumber = require('../middlewares/verifyphone');
+
 const router = new express.Router();
 
-router.post('/users', async (req, res) => {
+const upload = multer({
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
+      return cb(new Error('Please upload jpg or png or jpeg'));
+    }
+    cb(undefined, true);
+  }
+});
+
+router.post('/users/phonenumber', sendCodeToMobile, async (req, res) => {
+  res.send(req.body);
+});
+
+router.post('/users', verifyPhoneNumber, async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
@@ -17,6 +37,44 @@ router.post('/users', async (req, res) => {
 
 router.get('/users/me', auth, async (req, res) => {
   res.send(req.user);
+});
+
+router.post(
+  '/users/me/avatar',
+  auth,
+  upload.single('upload'),
+  async (req, res) => {
+    try {
+      req.user.avatar = req.file.buffer;
+      await req.user.save();
+      res.send();
+    } catch (error) {
+      res.status(400).send();
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+router.get('/user/:id/avatar', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.avatar) {
+      throw new Error();
+    }
+
+    res.set('Content-Type', 'image/jpg');
+    res.send(user.avatar);
+  } catch (error) {
+    res.status(404).send();
+  }
+});
+
+router.delete('/users/me/avatar', auth, async (req, res) => {
+  req.user.avatar = undefined;
+  await req.user.save();
+  res.send();
 });
 
 router.patch('/users/me', auth, async (req, res) => {
